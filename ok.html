@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>StrongRock2025</title>
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;}
+  body{background:#fff;color:#333;overflow-x:hidden;scroll-behavior:smooth;}
+  :root{--primary:#e50914;--primary-dark:#b20710;--gray:#6c757d;--light:#f9f9f9;}
+
+  /* Navbar */
+  header{position:fixed;width:100%;top:0;z-index:100;background:#fff;box-shadow:0 10px 30px rgba(0,0,0,0.05);}
+  nav{max-width:1300px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;}
+  .logo{font-weight:900;font-size:1.6rem;color:var(--primary);}
+  nav ul{display:flex;gap:2rem; margin: 0; padding: 0; list-style: none; }
+  nav ul li a{text-decoration:none;font-weight:500;color:#333;transition:.3s;}
+  nav ul li a:hover{color:var(--primary);}
+  .btn{padding:.7rem 1.6rem;background:var(--primary);color:#fff;border-radius:12px;font-weight:700;transition:.4s;}
+  .btn:hover{transform:scale(1.05) translateY(-2px);}
+  .hamburger{display:none;flex-direction:column;gap:5px;cursor:pointer;z-index:101;}
+  .hamburger span{width:28px;height:3px;background:#333;border-radius:3px;}
+
+  /* Fullscreen menu 2025 style */
+  .fullscreen-menu{
+    position:fixed;top:0;left:0;width:100%;height:100%;
+    background:rgba(255,255,255,0.98);display:flex;flex-direction:column;justify-content:center;align-items:center;
+    gap:2.5rem;font-size:2rem;transition:transform .5s ease,opacity .5s ease;
+    transform:translateY(-100%);opacity:0;z-index:1000;
+  }
+  .fullscreen-menu.show{transform:translateY(0);opacity:1;}
+  .fullscreen-menu a{text-decoration:none;color:#333;font-weight:700;transition:.3s;}
+  .fullscreen-menu a:hover{color:var(--primary);}
+
+  /* Hero with video */
+  .hero{height:100vh;position:relative;display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;}
+  .hero video{position:absolute;top:0;left:0;width:100%;height:100%;object-fit:cover;z-index:-2;}
+  .hero::after{content:"";position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(255,255,255,0.6);z-index:-1;}
+  .hero-content{position:relative;z-index:1;max-width:900px;animation:fadeIn 1.5s ease forwards;}
+  .hero h1{font-size:3rem;font-weight:900;margin-bottom:1rem;color:#111;}
+  .hero h1 span{color:var(--primary);}
+  .hero p{font-size:1.3rem;margin-bottom:2rem;color:#555;}
+  .hero .btn{margin:.5rem;}
+  .typing{display:inline-block;border-right:3px solid var(--primary);animation:blink 1s infinite;}
+  @keyframes blink{50%{border-color:transparent;}}
+  @keyframes fadeIn{0%{opacity:0;transform:translateY(30px);}100%{opacity:1;transform:translateY(0);}}
+
+  /* Sections */
+  section{padding:6rem 2rem;}
+  .features,.products,.plans{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:2.5rem;max-width:1300px;margin:auto;}
+  .feature,.product-card,.plan{background:#fff;border-radius:24px;padding:2rem;text-align:center;transition:.5s;transform:translateY(60px);opacity:0;box-shadow:0 15px 25px rgba(0,0,0,0.05);}
+  .feature.visible,.product-card.visible,.plan.visible,.contact form.visible{transform:translateY(0);opacity:1;}
+  .feature div{font-size:3rem;margin-bottom:1rem;}
+  .feature h3,.product-card h3,.plan h3{color:var(--primary-dark);margin-bottom:.5rem;font-weight:700;}
+  .feature p,.product-card p,.plan p{color:var(--gray);}
+
+  /* Products 3D hover */
+  .product-card{perspective:1200px;cursor:pointer;transition:transform .2s;}
+  .product-inner{border-radius:20px;overflow:hidden;transition:transform .3s,box-shadow .3s;}
+  .product-card:hover .product-inner{transform:rotateY(5deg) rotateX(3deg) scale(1.05);box-shadow:0 25px 45px rgba(229,9,20,0.35);}
+  .product-card img{width:100%;transition:.4s;}
+  .product-card img:hover{transform:scale(1.05);}
+  .product-card p.price{color:var(--primary);font-weight:bold;margin:1rem 0;font-size:1.6rem;}
+  .product-card button{padding:.9rem 1.6rem;border:none;border-radius:12px;background:var(--primary);color:#fff;font-weight:700;cursor:pointer;transition:.4s;}
+  .product-card button:hover{transform:scale(1.05) translateY(-2px);}
+
+  /* Contact */
+  .contact h2{text-align:center;font-size:2rem;margin-bottom:2rem;color:#111;}
+  .contact form{max-width:650px;margin:auto;display:flex;flex-direction:column;gap:1rem;}
+  .contact input,.contact textarea{padding:1rem;border-radius:14px;border:1px solid #ddd;transition:.4s;}
+  .contact input:focus,.contact textarea:focus{border-color:var(--primary);outline:none;box-shadow:0 0 0 6px rgba(229,9,20,0.15);}
+  .contact button{padding:1rem;background:var(--primary);color:#fff;border:none;border-radius:14px;cursor:pointer;transition:.3s;}
+  .contact button:hover{transform:translateY(-2px);}
+
+  /* Footer */
+  footer{background:#f8f8f8;text-align:center;padding:3rem;color:var(--gray);}
+  footer a{color:var(--primary);}
+  footer a:hover{color:var(--primary-dark);}
+
+  /* Responsive */
+  @media(max-width:768px){nav ul, nav .btn{display:none;}.hamburger{display:flex;}}
+</style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <div class="logo">Strong Rocks</div>
+    <ul>
+      <li><a href="#features">Features</a></li>
+      <li><a href="#products">Products</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a href="#products" class="btn">Shop Now</a>
+    <div class="hamburger" id="hamburger"><span></span><span></span><span></span></div>
+  </nav>
+</header>
+
+<!-- Fullscreen menu -->
+<div class="fullscreen-menu" id="fullscreenMenu">
+  <a href="#features" class="menu-link">Features</a>
+  <a href="#products" class="menu-link">Products</a>
+  <a href="#contact" class="menu-link">Contact</a>
+  <a href="#products" class="menu-link">Shop Now</a>
+</div>
+
+<!-- Hero -->
+<section class="hero">
+  <video src="io.mp4" autoplay muted loop></video>
+  <div class="hero-content">
+    <h1> <span>Small steps  </span> <span class="typing"></span></h1>
+    <p>Supplier of precious, high-quality minerals for your industrial projects and passionate collectors.</p>
+    <a href="#products" class="btn">Explore Now</a>
+  </div>
+</section>
+
+<!-- Features -->
+<section id="features" class="features">
+  <div class="feature"><div>💎</div><h3>Top Quality</h3><p>Curated premium minerals.</p></div>
+  <div class="feature"><div>🌍</div><h3>Worldwide</h3><p>Global shipping with trust.</p></div>
+  <div class="feature"><div>⚡</div><h3>Fast Delivery</h3><p>Quick and secure delivery.</p></div>
+</section>
+
+<!-- Products -->
+<h2 style="text-align: center;font-size: 80px ;">Our Products</h2>
+
+<section id="products" class="products">
+  <div class="product-card"><div class="product-inner"><img src="/image/Aquamarine.jpg" alt="Aquamarine"><h3>Aquamarine</h3><p class="price">120kgs per gram 80$
+</p><a href="#contact" class="menu-link"><button>Buy Now</button></div></div></a>
+  <div class="product-card"><div class="product-inner"><img src="/image/Amethyst.png" alt="Amethyst"><h3>Amethyst</h3><p class="price">100kgs per  gram 30$</p><a href="#contact" class="menu-link"><button>Buy Now</button></div></div></a>
+  <div class="product-card"><div class="product-inner"><img src="/image/Diamond 500carats.webp" alt="diamond"><h3>Diamond 500 carats</h3><p class="price">Per carat 3500$</p><a href="#contact" class="menu-link"><button>Buy Now</button></div></div></a>
+ <div class="product-card"><div class="product-inner"><img src="/image/Sodalite .jpg" alt="Sodalite"><h3>Sodalite</h3><p class="price">50kgs per kg 500$
+</p><a href="#contact" class="menu-link"><button>Buy Now</button></div></div></a>
+  <div class="product-card"><div class="product-inner"><img src="/image/Sugar diamond .jpg" alt="Sugar diamond "><h3>Sugar Diamond </h3><p class="price">100kgs per gram 150$
+</p><a href="#contact" class="menu-link"><button>Buy Now</button></div></div></a>
+  <div class="product-card"><div class="product-inner"><img src="/image/Sugilite .jpg" alt="Sugilite "><h3>Sugilite </h3><p class="price">100kgs per kg 1300$</p><a href="#contact" class="menu-link"><button>Buy Now</button></div></div></a>
+  <div class="product-card"><div class="product-inner"><img src="/image/Citrine.jpg" alt="Citrine"><h3>Citrine</h3><p class="price">$50 - $120</p><a href="#contact" class="menu-link"><button>Buy Now</button></div></div></a>
+ <div class="product-card"><div class="product-inner"><img src="/image/Tigereye.jpg" alt="Sodalite"><h3>Tiger Eye </h3><p class="price">10kgs per gram 500$</p><a href="#contact" class="menu-link"><button>Buy Now</button></div></div></a>
+  <div class="product-card"><div class="product-inner"><img src="/image/Red garnet.jpg" alt="Red garnet"><h3>Red Garnet</h3><p class="price">5kgs per gram 25$
+</p><a href="#contact" class="menu-link"><button>Buy Now</button></div></div></a>
+<div class="product-card"><div class="product-inner"><img src="/image/Red Ruby.jpg" alt="Red ruby"><h3>Red Ruby</h3><p class="price">100kgs per gram 900$
+</p><a href="#contact" class="menu-link"><button>Buy Now</button></div></div></a>
+</section>
+
+<!-- Pricing -->
+
+<!-- Contact -->
+<section id="contact" style="padding: 4rem 2rem; background: #f9f9f9; text-align: center;">
+  <h2 style="font-size: 2.5rem; margin-bottom: 1rem;">Contact Us</h2>
+  <p style="margin-bottom: 2rem;">Reach out to us through the following contact details:</p>
+
+  <p style="font-size: 1.2rem; margin: 0.5rem 0;">
+    📧 Email: 
+    <a href="mailto:info@mineredge.com" style="color: #e50914; text-decoration: none; font-weight: bold;">
+      benjamin9banza@gmail.com
+    </a>
+  </p>
+  
+  <p style="font-size: 1.2rem; margin: 0.5rem 0;">
+    📞 Phone 1: <span style="font-weight: bold;">+243854462918</span><br>
+     📞 Phone 2: <span style="font-weight: bold;">+260961224333</span>
+  </p>
+  
+  <p style="font-size: 1.2rem; margin: 0.5rem 0;">
+    📍 Address: <span style="font-weight: bold;">RDC</span>
+  </p>
+  
+</section>
+
+<!-- Footer -->
+<footer>
+  <p>© 2025 Strong Rocks . All rights reserved.</p>
+     
+</footer>
+
+<script>
+  // Hamburger menu toggle
+  const hamburger=document.getElementById("hamburger");
+  const fullscreenMenu=document.getElementById("fullscreenMenu");
+  hamburger.addEventListener("click",()=>fullscreenMenu.classList.toggle("show"));
+  document.querySelectorAll(".menu-link").forEach(link=>link.addEventListener("click",()=>fullscreenMenu.classList.remove("show")));
+
+  // Scroll reveal
+  const observer=new IntersectionObserver(entries=>{
+    entries.forEach(entry=>{
+      if(entry.isIntersecting){
+        entry.target.classList.add('visible');
+      }
+    });
+  },{threshold:0.2});
+  document.querySelectorAll('.feature,.product-card,.plan,.contact form').forEach(el=>observer.observe(el));
+
+  // 3D parallax mouse effect on products
+  document.querySelectorAll('.product-card').forEach(card=>{
+    const inner=card.querySelector('.product-inner');
+    card.addEventListener('mousemove',e=>{
+      const rect=card.getBoundingClientRect();
+      const x=e.clientX-rect.left;
+      const y=e.clientY-rect.top;
+      const cx=rect.width/2, cy=rect.height/2;
+      const dx=(x-cx)/cx*10, dy=(y-cy)/cy*10;
+      inner.style.transform=`rotateY(${dx}deg) rotateX(${-dy}deg) scale(1.05)`;
+    });
+    card.addEventListener('mouseleave',()=>{inner.style.transform='rotateY(0) rotateX(0) scale(1)';});
+  });
+
+  // Typing effect
+  const words=["Big Victories"];
+  let i=0,j=0,isDeleting=false;
+  const typingSpan=document.querySelector(".typing");
+  function type(){
+    const currentWord=words[i];
+    typingSpan.textContent=currentWord.substring(0,j);
+    if(!isDeleting&&j<currentWord.length) j++;
+    else if(isDeleting&&j>0) j--;
+    if(j===currentWord.length){isDeleting=true;setTimeout(type,1000);return;}
+    if(j===0&&isDeleting){isDeleting=false;i=(i+1)%words.length;}
+    setTimeout(type,isDeleting?100:150);
+  }
+  type();
+</script>
+
+</body>
+</html>
